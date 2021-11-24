@@ -1,0 +1,95 @@
+﻿<Window x:Class="WpfApp2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp2"
+        xmlns:views="clr-namespace:WpfApp2.View"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="580" Width="520" ResizeMode="CanResize"
+        DataContext="{Binding Main, Source={StaticResource Locator}}">
+     <Window.Resources>
+          <DataTemplate x:Key="DataTemplate_Level2">
+                    <TextBox  Text="{Binding Value , Mode=OneWay}" IsReadOnly="{Binding IsClue, Mode=OneWay}" Width="42" Height="60" FontSize="20" MaxLength="1" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center">
+                         <TextBox.Style>
+                              <Style TargetType="TextBox">
+                                   <Style.Triggers>
+                                        <Trigger Property="IsReadOnly" Value="True">
+                                             <Setter Property="Foreground" Value="Red" />
+                                        </Trigger>
+                                   </Style.Triggers>
+                              </Style>
+                         </TextBox.Style>
+                    </TextBox>
+          </DataTemplate>
+
+          <DataTemplate x:Key="DataTemplate_Level1">
+               <ItemsControl ItemsSource="{Binding}" ItemTemplate="{DynamicResource DataTemplate_Level2}" Padding="0">
+                    <ItemsControl.ItemsPanel>
+                         <ItemsPanelTemplate>
+                              <StackPanel Orientation="Horizontal"/>
+                         </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+               </ItemsControl>
+          </DataTemplate>
+
+     </Window.Resources>
+     <Grid>
+          
+          <Grid.ColumnDefinitions>
+               <ColumnDefinition Width="3*"/>
+               <ColumnDefinition/>
+          </Grid.ColumnDefinitions>
+          <Grid Grid.Column="0" Panel.ZIndex="2">
+               <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="20*"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="20*"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="20*"/>
+               </Grid.ColumnDefinitions>
+               <Grid.RowDefinitions>
+                    <RowDefinition Height="25*"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="25*"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="25*"/>
+               </Grid.RowDefinitions>
+               <Border Background="Black" Grid.Column="1" Grid.RowSpan="5"/>
+               <Border Background="Black" Grid.Column="3" Grid.RowSpan="5"/>
+               <Border Background="Black" Grid.Row="1" Grid.ColumnSpan="5"/>
+               <Border Background="Black" Grid.Row="3" Grid.ColumnSpan="5"/>
+          </Grid>
+          <Grid Grid.Column="0">
+               <ItemsControl  DataContext="{Binding GameViewModel}" ItemTemplate="{DynamicResource DataTemplate_Level1}" ItemsSource="{Binding CurrentMatrix }"/>
+          </Grid>
+
+          <Grid Grid.Column="1">
+               <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+               </Grid.RowDefinitions>
+
+               <StackPanel Grid.Row="0">
+                    <TextBlock Text="Nehézség:"/>
+                    <ComboBox DataContext="{Binding GameViewModel}" SelectedIndex="{Binding Difficulty}">
+                         <ComboBoxItem Content="Könnyű" Selector.IsSelected="True"/>
+                         <ComboBoxItem Content="Közepes"/>
+                         <ComboBoxItem Content="Nehéz"/>
+                    </ComboBox>
+               </StackPanel>
+
+               <TextBlock Grid.Row="1" Text="Ide kerül az időzítő" />
+
+               <TextBlock Grid.Row="2" Text="Ide kerül a hibaszám"/>
+
+               <StackPanel Grid.Row="3">
+                    <Button DataContext="{Binding GameViewModel}" Command="{Binding GetSolutionCommand}" Content="Végeztem!"  Margin="15"/>
+                    <Button DataContext="{Binding GameViewModel}" Command="{Binding GetCluesCommand}" Content="Új játék!" Margin="15"/>
+               </StackPanel>
+          </Grid>
+     </Grid>
+     
+</Window>
