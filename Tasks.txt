@@ -1,0 +1,18 @@
+1. [+] Számok generálása
+2. [+] Nehézségi szintek beállítása
+3. [+] Generált számok kiíratása
+4. [+] Nehézségi szintek kiíratása
+5. [+] Clue legenerálása
+6. [+] Clue beállítása nehézségi szintekhez mérten
+7. [+] "Új játék" gomb
+8. [+] "Végeztem" gomb
+9. [+] Új játék gomb összekapcsolása a számok legenerálásával és a nehézségi szintekhez mért cluek beállításával
+10. [+] Végeztem gomb összekapcsolása a megoldás kiíratásával
+11. [-] Talán átszínezni a számokat megfelelõen
+12. [-] Stopper
+13. [-] Idõ mérése
+14. [-] Idõ dokumentálása
+15. [-] Legjobb idõ kigyûjtése
+16. [-] Legjobb idõ kiíratása
+17. [-] Hibák számlálása
+18. [-] Hibák kiíratása a Végeztem gomb megnyomásával.
