@@ -6,19 +6,29 @@
         xmlns:local="clr-namespace:WpfApp2"
         xmlns:views="clr-namespace:WpfApp2.View"
         mc:Ignorable="d"
-        Title="MainWindow" Height="580" Width="520" ResizeMode="CanResize"
+         Title="MainWindow" Height="560" Width="710"
         DataContext="{Binding Main, Source={StaticResource Locator}}">
      <Window.Resources>
           <DataTemplate x:Key="DataTemplate_Level2">
-                    <TextBox  Text="{Binding Value , Mode=OneWay}" IsReadOnly="{Binding IsClue, Mode=OneWay}" Width="42" Height="60" FontSize="20" MaxLength="1" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <TextBox  Text="{Binding Value , Mode=TwoWay}" IsReadOnly="{Binding IsClue, Mode=OneWay}" Width="58" Height="58" FontSize="24" MaxLength="1" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center">
                          <TextBox.Style>
-                              <Style TargetType="TextBox">
-                                   <Style.Triggers>
-                                        <Trigger Property="IsReadOnly" Value="True">
-                                             <Setter Property="Foreground" Value="Red" />
-                                        </Trigger>
-                                   </Style.Triggers>
-                              </Style>
+							 <Style TargetType="TextBox">
+							    <Style.Triggers>
+								    <MultiDataTrigger>
+									    <MultiDataTrigger.Conditions> <!-- check if the cell's value is not a clue & not an error -->
+										    <Condition Binding="{Binding IsError}" Value="False" />
+										    <Condition Binding="{Binding IsClue}" Value="False" />
+									    </MultiDataTrigger.Conditions>
+									    <Setter Property="Foreground" Value="Green" />
+								    </MultiDataTrigger> <!-- check if the cell's value is a clue -->
+								    <Trigger Property="IsReadOnly" Value="True">
+									    <Setter Property="Foreground" Value="Blue" />
+								    </Trigger> <!-- check if the cell's value is an error -->
+								    <DataTrigger Binding="{Binding IsError}" Value="True">
+									    <Setter Property="Foreground" Value="Red" />
+								    </DataTrigger>
+							    </Style.Triggers>
+							 </Style>
                          </TextBox.Style>
                     </TextBox>
           </DataTemplate>
@@ -64,7 +74,7 @@
                <ItemsControl  DataContext="{Binding GameViewModel}" ItemTemplate="{DynamicResource DataTemplate_Level1}" ItemsSource="{Binding CurrentMatrix }"/>
           </Grid>
 
-          <Grid Grid.Column="1">
+          <Grid Grid.Column="1" Background="Lightblue">
                <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
@@ -81,13 +91,21 @@
                     </ComboBox>
                </StackPanel>
 
-               <TextBlock Grid.Row="1" Text="Ide kerül az időzítő" />
-
-               <TextBlock Grid.Row="2" Text="Ide kerül a hibaszám"/>
+               <TextBlock Grid.Row="1" 
+                          Name="TimeDisplay"
+                          Grid.ColumnSpan="3"
+                          FontSize="24" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                
+			  <!-- dislpay the number of errors in a textblock -->
+			  <TextBlock Grid.Row="2" Text="{Binding Path=GameViewModel.Errors, StringFormat='Hibák száma: {0}'}" FontSize="18" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" />
 
                <StackPanel Grid.Row="3">
-                    <Button DataContext="{Binding GameViewModel}" Command="{Binding GetSolutionCommand}" Content="Végeztem!"  Margin="15"/>
-                    <Button DataContext="{Binding GameViewModel}" Command="{Binding GetCluesCommand}" Content="Új játék!" Margin="15"/>
+                    <Button DataContext="{Binding GameViewModel}" Command="{Binding GetSolutionCommand}" Content="Végeztem!"  Margin="8"
+							Click="Stop_Click" Name="Stop"/>
+				   <Button DataContext="{Binding GameViewModel}" Command="{Binding GetSolutionCommand}" Content="Visszaállít"  Margin="8"
+							Click="Clear_Click" Name="Clear"/>
+                    <Button DataContext="{Binding GameViewModel}" Command="{Binding GetCluesCommand}" Content="Új játék!" Margin="8" 
+							Click="Start_Click" Name="Start"/>
                </StackPanel>
           </Grid>
      </Grid>
