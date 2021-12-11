@@ -17,11 +17,22 @@ namespace WpfApp2.ViewModel.Impl
           private int _nehezseg;
           private List<List<Cell>> _currentMatrix;
           private int myVar;
+          private int _errors = 0;
 
           public int MyProperty
           {
                get { return myVar; }
                set { myVar = value; }
+          }
+
+          public int Errors
+          {
+               get { return _errors; }
+               set
+               {
+                    _errors = value;
+                    RaisePropertyChanged();
+               }
           }
 
           public int Difficulty
@@ -62,12 +73,29 @@ namespace WpfApp2.ViewModel.Impl
 
           private void ShowResult()
           {
-               CurrentMatrix = _factory.GetSolution();
+               List<List<Cell>> solution = _factory.GetSolution(); //storing the full solution matrix
+               for(int i = 0; i < 9; i++) //loop through the 9 rows
+            {
+                for(int j = 0; j < 9; j++) //loop through the 9 columns
+                {
+                    if(solution[i][j].Value != CurrentMatrix[i][j].Value) //check if the current cell value is different from the value in the solution
+                    {
+                        Errors += 1; // increase the number of errors by one
+                        solution[i][j].IsError = true; //setting the iserror boolean value to true
+                    } else if(!CurrentMatrix[i][j].IsClue) //checking if the current cell is not a clue
+                    {
+                        solution[i][j].IsClue = false;  //set the isclue boolean value to false
+                    }
+                }
+            }
+               CurrentMatrix = solution; //setting the updated solution matrix to the current matrix
+              
           }
 
           private void NewGame()
           {
                CurrentMatrix = _factory.CreateNewGame(Difficulty);
+               Errors = 0; //reaset the number of errors to zero
           }
      }
 }

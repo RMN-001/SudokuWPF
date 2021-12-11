@@ -31,11 +31,11 @@ namespace WpfApp2.Factories
                     {
                          if (cells.Contains(x + 1))
                          {
-                              _clues[y][x] = new Cell(_solution[y][x].Value.ToString(), true);
+                              _clues[y][x] = new Cell(_solution[y][x].Value.ToString(), true, false);
                          }
                          else
                          {
-                              _clues[y][x] = new Cell("", false);
+                              _clues[y][x] = new Cell("", false, false);
                          }
                     }
                }
@@ -74,7 +74,7 @@ namespace WpfApp2.Factories
                     _clues.Add(new List<Cell>());
                     for (int j = 0; j < 9; j++)
                     {
-                         _clues[i].Add(new Cell("",false));
+                         _clues[i].Add(new Cell("",false,false));
                     }
                }
                Kiiratas(_clues);
