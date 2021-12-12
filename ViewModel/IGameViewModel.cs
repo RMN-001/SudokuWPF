@@ -8,6 +8,7 @@ using WpfApp2.Model;
 
 namespace WpfApp2.ViewModel
 {
+     // settings the getters and setters in the interface
      public interface IGameViewModel
      {
           ICommand GetSolutionCommand { get; }

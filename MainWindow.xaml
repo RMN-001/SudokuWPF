@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:WpfApp2"
         xmlns:views="clr-namespace:WpfApp2.View"
         mc:Ignorable="d"
-         Title="MainWindow" Height="560" Width="710"
+         Title="Sudoku" Height="560" Width="710"
         DataContext="{Binding Main, Source={StaticResource Locator}}">
      <Window.Resources>
           <DataTemplate x:Key="DataTemplate_Level2">

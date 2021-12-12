@@ -13,12 +13,15 @@ namespace WpfApp2.ViewModel.Impl
 {
      public class GameViewModel : ViewModelBase, IGameViewModel
      {
+          // declaring the variables
           private readonly IBuildSudokuFactory _factory;
           private int _nehezseg;
           private List<List<Cell>> _currentMatrix;
           private int myVar;
           private int _errors = 0;
+          
 
+          // settings the getters and setters
           public int MyProperty
           {
                get { return myVar; }
@@ -34,7 +37,7 @@ namespace WpfApp2.ViewModel.Impl
                     RaisePropertyChanged();
                }
           }
-
+          
           public int Difficulty
           {
                get { return _nehezseg; }
@@ -95,7 +98,7 @@ namespace WpfApp2.ViewModel.Impl
           private void NewGame()
           {
                CurrentMatrix = _factory.CreateNewGame(Difficulty);
-               Errors = 0; //reaset the number of errors to zero
+               Errors = 0; //reset the number of errors to zero
           }
      }
 }

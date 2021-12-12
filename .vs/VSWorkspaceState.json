@@ -1,8 +1,11 @@
 {
   "ExpandedNodes": [
     "",
+    "\\Factories",
+    "\\Model",
+    "\\ViewModel",
     "\\ViewModel\\Impl"
   ],
-  "SelectedNode": "\\MainWindow.xaml",
+  "SelectedNode": "\\ViewModel\\IGameViewModel.cs",
   "PreviewInSolutionExplorer": false
 }
