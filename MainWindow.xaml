@@ -82,16 +82,21 @@
                     <RowDefinition/>
                </Grid.RowDefinitions>
 
-               <StackPanel Grid.Row="0">
-                    <TextBlock Text="Nehézség:"/>
-                    <ComboBox DataContext="{Binding GameViewModel}" SelectedIndex="{Binding Difficulty}">
-                         <ComboBoxItem Content="Könnyű" Selector.IsSelected="True"/>
-                         <ComboBoxItem Content="Közepes"/>
-                         <ComboBoxItem Content="Nehéz"/>
-                    </ComboBox>
-               </StackPanel>
+			  <StackPanel Grid.Row="0">
+				  <TextBlock Text="Nehézség:"/>
+				  <ComboBox DataContext="{Binding GameViewModel}" SelectedIndex="{Binding Difficulty}">
+					  <ComboBoxItem Content="Könnyű" Selector.IsSelected="True"/>
+					  <ComboBoxItem Content="Közepes"/>
+					  <ComboBoxItem Content="Nehéz"/>
+				  </ComboBox>
+			  </StackPanel>
 
-               <TextBlock Grid.Row="1" 
+			  
+			  <!--<TextBlock Grid.Row="1" Text="{Binding Path=GameViewModel.Line, StringFormat='Legjobb idő: {00:05:32}'" FontSize="18" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" />-->
+			  
+			  
+              <!-- display the actual game time -->
+			  <TextBlock Grid.Row="1" 
                           Name="TimeDisplay"
                           Grid.ColumnSpan="3"
                           FontSize="24" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" />
@@ -99,13 +104,14 @@
 			  <!-- dislpay the number of errors in a textblock -->
 			  <TextBlock Grid.Row="2" Text="{Binding Path=GameViewModel.Errors, StringFormat='Hibák száma: {0}'}" FontSize="18" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" />
 
-               <StackPanel Grid.Row="3">
-                    <Button DataContext="{Binding GameViewModel}" Command="{Binding GetSolutionCommand}" Content="Végeztem!"  Margin="8"
+               <StackPanel Grid.Row="4">
+				   <Button DataContext="{Binding GameViewModel}" Command="{Binding GetCluesCommand}" Content="Új játék!" Margin="8"
+							Click="Start_Click" Name="Start"/>
+                   <Button DataContext="{Binding GameViewModel}" Command="{Binding GetSolutionCommand}" Content="Végeztem!"  Margin="8"
 							Click="Stop_Click" Name="Stop"/>
 				   <Button DataContext="{Binding GameViewModel}" Command="{Binding GetSolutionCommand}" Content="Visszaállít"  Margin="8"
 							Click="Clear_Click" Name="Clear"/>
-                    <Button DataContext="{Binding GameViewModel}" Command="{Binding GetCluesCommand}" Content="Új játék!" Margin="8" 
-							Click="Start_Click" Name="Start"/>
+                    
                </StackPanel>
           </Grid>
      </Grid>

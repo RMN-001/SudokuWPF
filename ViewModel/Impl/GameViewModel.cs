@@ -100,5 +100,37 @@ namespace WpfApp2.ViewModel.Impl
                CurrentMatrix = _factory.CreateNewGame(Difficulty);
                Errors = 0; //reset the number of errors to zero
           }
+
+          /*private void bestResult()
+          {
+              String line;
+              try
+              {
+                  //Pass the file path and file name to the StreamReader constructor
+                  StreamReader sr = new StreamReader("C:\Users\rekec\source\repos\SudokuWPF\times.txt");
+                  //Read the first line of text
+                  line = sr.ReadLine();
+                  //Continue to read until you reach end of file
+                  while (line != null)
+                  {
+                      //write the line to console window
+                      Console.WriteLine("A legjobb eredmény:" + line);
+                      //Read the next line
+                      line = sr.ReadLine();
+                  }
+                  //close the file
+                  sr.Close();
+                  Console.ReadLine();
+              }
+              catch(Exception e)
+              {
+                  Console.WriteLine("Exception: " + e.Message);
+              }
+              finally
+              {
+                  Console.WriteLine("Executing finally block.");
+              }
+          }*/
+
      }
 }

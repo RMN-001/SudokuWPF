@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\rekec\source\repos\SudokuWPF\obj\Debug\
+C:\Users\rekec\Source\Repos\SudokuWPF\obj\Debug\
 WpfApp2
 none
 false
 DEBUG;TRACE
-C:\Users\rekec\source\repos\SudokuWPF\App.xaml
+C:\Users\rekec\Source\Repos\SudokuWPF\App.xaml
 4-673754179
 
 15-1809067644
-123-1412986771
+123-194861116
 MainWindow.xaml;View\Grid9x9.xaml;View\OneCellView.xaml;View\OneGridView.xaml;
 
-True
+False
 

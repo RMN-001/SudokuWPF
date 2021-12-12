@@ -29,6 +29,7 @@ using System.Windows.Media.TextFormatting;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Shell;
+using WpfApp2;
 using WpfApp2.View;
 using WpfApp2.ViewModel;
 
